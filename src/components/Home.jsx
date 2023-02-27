@@ -37,8 +37,10 @@ function HomeComponent() {
               </Link>
             </li>
             <li className="list-title-item">
-              <i class="fa-solid fa-person-shelter"></i>
-              Rooms
+              <Link to={'/home/rooms'} style={{textDecoration: 'none'}}>
+                <i class="fa-solid fa-person-shelter"></i>
+                Rooms
+              </Link>
             </li>
             <li className="list-title-item">
               <i class="fa-solid fa-truck-fast"></i>
@@ -51,12 +53,16 @@ function HomeComponent() {
           <h5>NEW</h5>
           <ul className="list-title">
             <li className="list-title-item">
-              <i class="fa-solid fa-hotel"></i>
-              New Hotel
+              <Link to={'/home/hotels/hotel-add'} style={{textDecoration: 'none'}}>
+                <i class="fa-solid fa-hotel"></i>
+                New Hotel
+              </Link>
             </li>
             <li className="list-title-item">
-              <i class="fa-solid fa-person-shelter"></i>
-              New Room
+              <Link to={'/home/rooms/room-add'} style={{textDecoration: 'none'}}>
+                <i class="fa-solid fa-person-shelter"></i>
+                New Room
+              </Link>
             </li>
           </ul>
         </div>

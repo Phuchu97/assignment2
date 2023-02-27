@@ -5,6 +5,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+.login {
+  height: 868.75px;
   background: linear-gradient(#141e30,#243b55);
 }
 

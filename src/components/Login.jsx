@@ -26,54 +26,56 @@ function LoginComponent() {
     };
   
     return (
-      <div className="login-box">
-        {/* <Navbar>
-          <Navbar.Brand>Login Page</Navbar.Brand>
-        </Navbar> */}
-        {isRegisterOpen ? (
-          <Form className="form-middle">
-            <h2>Register</h2>
-            <FormGroup>
-              <FormControl
-                type="text"
-                placeholder="Username"
-                onChange={(e) => setUsername(e.target.value)}
-                className="form-input"
-              />
-            </FormGroup>
-            <FormGroup>
-              <FormControl
-                type="password"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </FormGroup>
-            <Button variant="primary" onClick={handleRegister}>
-              Register
-            </Button>
-          </Form>
-        ) : (
-          <Form className="form-middle">
-             <h1>Login</h1>
-            <FormGroup className="form-middle-group">
-              <label className="form-middle-label" htmlFor="">Username</label>
-              <FormControl
-                type="text"
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </FormGroup>
-            <FormGroup className="form-middle-group">
-              <label className="form-middle-label" htmlFor="">Password</label>
-              <FormControl
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </FormGroup>
-            <Button variant="primary" onClick={handleLogin}>
-              Login
-            </Button>
-          </Form>
-        )}
+      <div className="login">
+        <div className="login-box">
+          {/* <Navbar>
+            <Navbar.Brand>Login Page</Navbar.Brand>
+          </Navbar> */}
+          {isRegisterOpen ? (
+            <Form className="form-middle">
+              <h2>Register</h2>
+              <FormGroup>
+                <FormControl
+                  type="text"
+                  placeholder="Username"
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="form-input"
+                />
+              </FormGroup>
+              <FormGroup>
+                <FormControl
+                  type="password"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </FormGroup>
+              <Button variant="primary" onClick={handleRegister}>
+                Register
+              </Button>
+            </Form>
+          ) : (
+            <Form className="form-middle">
+              <h1>Login</h1>
+              <FormGroup className="form-middle-group">
+                <label className="form-middle-label" htmlFor="">Username</label>
+                <FormControl
+                  type="text"
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup className="form-middle-group">
+                <label className="form-middle-label" htmlFor="">Password</label>
+                <FormControl
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </FormGroup>
+              <Button variant="primary" onClick={handleLogin}>
+                Login
+              </Button>
+            </Form>
+          )}
+        </div>
       </div>
     );
 }
