@@ -3,10 +3,9 @@ import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 90 },
     {
-      field: 'user',
-      headerName: 'User',
+      field: 'name',
+      headerName: 'Customer',
       width: 200,
       editable: true,
     },
@@ -17,14 +16,20 @@ const columns = [
       editable: true,
     },
     {
-      field: 'room',
+      field: 'rooms',
       headerName: 'Room',
       width: 110,
       editable: true,
     },
     {
-      field: 'date',
-      headerName: 'Date',
+      field: 'startDate',
+      headerName: 'Start date',
+      width: 150,
+      editable: true,
+    },
+    {
+      field: 'endDate',
+      headerName: 'End date',
       width: 150,
       editable: true,
     },
@@ -56,23 +61,13 @@ const columns = [
     }
 ];
 
-const rows = [
-  { id: 1, user: 'Snow', hotel: 'Jon', room: '305,304', date: '15/09/2005', price: 120, payment: 'Credit Card', status: 'Booked'},
-  { id: 2, user: 'Lannister', hotel: 'Cersei', room: '305,304', date: '15/09/2005', price: 120, payment: 'Credit Card', status: 'Booked'},
-  { id: 3, user: 'Lannister', hotel: 'Jaime', room: '305,304', date: '15/09/2005', price: 120, payment: 'Credit Card', status: 'Booked'},
-  { id: 4, user: 'Stark', hotel: 'Arya', room: '305,304', date: '15/09/2005', price: 120, payment: 'Credit Card', status: 'Booked'},
-  { id: 5, user: 'Targaryen', hotel: 'Daenerys', room: '305,304', date: '15/09/2005', price: 120, payment: 'Credit Card', status: 'Booked'},
-  { id: 6, user: 'Melisandre', hotel: null, room: '305,304', date: '15/09/2005', price: 120, payment: 'Credit Card', status: 'Booked'},
-  { id: 7, user: 'Clifford', hotel: 'Ferrara', room: '305,304', date: '15/09/2005', price: 120, payment: 'Credit Card', status: 'Booked'},
-  { id: 8, user: 'Frances', hotel: 'Rossini', room: '305,304', date: '15/09/2005', price: 120, payment: 'Credit Card', status: 'Booked'},
-  { id: 9, user: 'Roxie', hotel: 'Harvey', room: '305,304', date: '15/09/2005', price: 120, payment: 'Credit Card', status: 'Booked'},
-];
-
- function DataGridDemo() {
+ function DataGridDemo(props) {
+  
   return (
     <Box sx={{ height: 400, width: '100%' }}>
       <DataGrid
-        rows={rows}
+        getRowId={(row) => row._id}
+        rows={props.rows}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}

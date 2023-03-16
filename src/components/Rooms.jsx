@@ -22,6 +22,7 @@ function RoomsComponent() {
   }
 
   const handleGetHotel = (data) => {
+    console.log(data);
     setListRoom(data);
   }
 
@@ -31,8 +32,8 @@ function RoomsComponent() {
 
   const columns = [
     {
-      field: 'hotelId',
-      headerName: 'HotelID',
+      field: 'hotel',
+      headerName: 'Hotel',
       width: 300,
       editable: true,
     },

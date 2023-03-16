@@ -8,10 +8,6 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import { getHotels, createRooms } from '../FetchApi';
 import { useNavigate } from 'react-router-dom';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs from 'dayjs';
 
 function RoomAddComponent() {
   const navigate = useNavigate();
@@ -21,23 +17,9 @@ function RoomAddComponent() {
   const [rooms, setRooms] = useState([]);
   const [description, setDescription] = useState('');
   const [hotelID, setHotelID] = useState('');
+  const [valueHotelSelect, setValueHotelSelect] = useState('');
+  const [hotelName, setHotelName] = useState('');
   const [listHotel, setListHotel] = useState([]);
-  const [startDate, setStartDate] = useState(
-    dayjs(new Date())
-  );
-  const [endDate, setEndDate] = useState(
-    dayjs(new Date())
-  );
-
-
-  const handleChangeStartDate = (newValue) => {
-    setStartDate(newValue);
-  };
-
-  const handleChangeEndDate = (newValue) => {
-    setEndDate(newValue);
-  };
-
 
   const handleAddHotel = (data) => {
     if(data.statusCode === 200) {
@@ -53,11 +35,10 @@ function RoomAddComponent() {
       maxPeople: maxPeople,
       price: price,
       rooms: rooms,
+      hotel: hotelName,
       hotelId: hotelID,
       title: title,
-      description: description,
-      startDate: startDate.$d.toISOString().slice(0, -5),
-      endDate: endDate.$d.toISOString().slice(0, -5)
+      description: description
     }
     try {
       console.log(data);
@@ -68,7 +49,6 @@ function RoomAddComponent() {
   }
 
   const hanldeListPhotos = (e) => {
-    
     if (e.keyCode == 13) {
       setRooms([...rooms,e.target.value]);
       e.target.value = '';
@@ -76,7 +56,11 @@ function RoomAddComponent() {
   }
 
   const handleChangeFeatured = (event) => {
-    setHotelID(event.target.value);
+    let getIdHotel = event.target.value.split(' ')[0];
+    let getNameHotel = event.target.value.split(' ').filter(obj => obj != getIdHotel).join(' ');
+    setValueHotelSelect(event.target.value)
+    setHotelName(getNameHotel);
+    setHotelID(getIdHotel);
   };
 
   const handleGetHotel = (data) => {
@@ -141,38 +125,12 @@ function RoomAddComponent() {
           </div>
 
           <div className='col-6 form-item'>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DesktopDatePicker
-                  label="Start date"
-                  inputFormat="MM/DD/YYYY"
-                  value={startDate}
-                  onChange={handleChangeStartDate}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-            </LocalizationProvider>
-          </div>
-
-          <div className='col-6 form-item'>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DesktopDatePicker
-                  label="End date"
-                  inputFormat="MM/DD/YYYY"
-                  value={endDate}
-                  onChange={handleChangeEndDate}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-            </LocalizationProvider>
-          </div>
-
-          
-          <div className='col-6 form-item'>
             <TextField 
               id="outlined-basic" 
               label="Rooms" 
               variant="outlined" 
               className='form-input-add'
               onKeyUp={(e) => hanldeListPhotos(e)}
-
             />
             {rooms.length > 0 && (
                 <div className='col-6 form-item ml-4 mt-2' >
@@ -193,7 +151,7 @@ function RoomAddComponent() {
               <Select
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
-                value={hotelID}
+                value={valueHotelSelect}
                 onChange={handleChangeFeatured}
                 label="Age"
               >
@@ -203,7 +161,7 @@ function RoomAddComponent() {
                 
                 {
                   listHotel.map(obj => {
-                    return <MenuItem value={obj._id}>{obj.name}</MenuItem>
+                    return <MenuItem value={`${obj._id} ${obj.name}`}>{obj.name}</MenuItem>
                   })
                 }
               </Select>

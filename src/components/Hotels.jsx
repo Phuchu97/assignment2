@@ -14,9 +14,7 @@ function HotelsComponent() {
   }
 
   const removeHotel = (data) => {
-    console.log(data);
     deleteHotel((data) => {
-      console.log(data);
       getHotels(handleGetHotel)
     }, {id: data.id})
   }

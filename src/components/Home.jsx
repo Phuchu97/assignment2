@@ -1,4 +1,4 @@
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route, Outlet, useNavigate } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import '../css/home.css'
@@ -6,6 +6,13 @@ import DashboardComponent from "./Dasboard";
 import HotelsComponent from "./Hotels";
 
 function HomeComponent() {
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/')
+  }
   return (
     <div className="home row">
       <div className="col-2 home-left sidebar">
@@ -43,8 +50,10 @@ function HomeComponent() {
               </Link>
             </li>
             <li className="list-title-item">
-              <i class="fa-solid fa-truck-fast"></i>
-              Transactions
+              <Link to={'/home/transaction'} style={{textDecoration: 'none'}}>
+                <i class="fa-solid fa-truck-fast"></i>
+                Transactions
+              </Link>
             </li>
           </ul>
         </div>
@@ -69,11 +78,11 @@ function HomeComponent() {
 
         <div className="row sidebar-item sidebar-list">
           <h5>USER</h5>
-          <ul className="list-title">
-            <Link to={'/'} className="logout" style={{textDecoration: 'none'}}>
+          <ul className="list-title" onClick={handleLogout} style={{cursor: 'pointer'}}>
+            <a className="logout" style={{textDecoration: 'none'}}>
               <div><i class="fa-solid fa-arrow-right-from-bracket"></i></div>
               <p style={{margin: 0}}>Logout</p>
-            </Link>
+            </a>
           </ul>
         </div>
 

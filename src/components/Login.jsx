@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import { Navbar, Form, FormGroup, FormControl, Button } from "react-bootstrap";
 import '../css/login.css'
+import { loginPage } from "../FetchApi";
 
 function LoginComponent() {
     const navigate = useNavigate();
@@ -10,12 +11,6 @@ function LoginComponent() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
   
-    const handleLogin = () => {
-      // Logic to handle login
-      setIsLoggedIn(true);
-      navigate('/home/dashboard')
-    };
-  
     const handleRegister = () => {
       // Logic to handle registration
     };
@@ -23,6 +18,30 @@ function LoginComponent() {
     const handleLogout = () => {
       // Logic to handle logout
       setIsLoggedIn(false);
+    };
+
+    const callbacklogin = (data) => {
+      if(data.statusCode === 200) {
+        alert('Đăng nhập thành công');
+        localStorage.userId = data.userId;
+        localStorage.token = data.token;
+        setIsLoggedIn(true);
+        navigate('/home/dashboard')
+      } else {
+        alert('Tên đăng nhập hoặc mật khẩu không đúng!');
+      }
+    }
+
+    async function handleLogin(){
+      // Logic to handle login
+      try {
+        await loginPage(callbacklogin, {
+          username: username,
+          password: password
+        })
+      } catch {
+        alert('Có lỗi trong quá trình đăng nhập!')
+      }
     };
   
     return (
@@ -57,15 +76,17 @@ function LoginComponent() {
             <Form className="form-middle">
               <h1>Login</h1>
               <FormGroup className="form-middle-group">
-                <label className="form-middle-label" htmlFor="">Username</label>
+                {/* <label className="form-middle-label" htmlFor="">Username</label> */}
                 <FormControl
+                  placeholder="Username"
                   type="text"
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </FormGroup>
               <FormGroup className="form-middle-group">
-                <label className="form-middle-label" htmlFor="">Password</label>
+                {/* <label className="form-middle-label" htmlFor="">Password</label> */}
                 <FormControl
+                  placeholder="Password"
                   type="password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
